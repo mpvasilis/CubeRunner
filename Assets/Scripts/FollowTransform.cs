@@ -5,6 +5,7 @@ public class FollowTransform : MonoBehaviour
 	public Transform transformObject;
 	public int axis;
 
+
 	private void Update()
 	{
 		Vector3 newPosition;

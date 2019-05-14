@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 	public static int difficulty;
 	private string[] difficultyNames = { "NaN", "Easy", "Medium", "Hard" };
 
+	AudioSource fxSound; 
+	public AudioClip crash;
+	public AudioClip backMusic; 
+
 	private float score;
 	public Text scoreUI;
 	private int highscore;
@@ -44,10 +48,15 @@ public class GameManager : MonoBehaviour
 	public void SwitchScene(int scene)
 	{
 		StartCoroutine(SceneTransition(scene));
+		fxSound.PlayOneShot(backMusic);
+
 	}
 
 	public void InitiateDeath()
 	{
+		fxSound.Stop();
+		fxSound.PlayOneShot(crash);
+
 		CancelInvoke("Spawn");
 
 		FindObjectOfType<PlayerMovement>().enabled = false;
@@ -61,6 +70,7 @@ public class GameManager : MonoBehaviour
 		highscoreUI.text = difficultyNames[difficulty] + " highscore: " + highscore;
 
 		StartCoroutine(DeathOverlayTransition());
+
 	}
 
 	private void UpdateHighscore()
@@ -115,11 +125,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+
 	private void Start()
 	{
+		fxSound = GetComponent<AudioSource> ();
 		fade.BeginFade(-1);
-
-		// Invoke obstacle spawning, frequency depends on difficulty
 		InvokeRepeating("Spawn", 1f, 0.5f / difficulty);
 	}
 }
