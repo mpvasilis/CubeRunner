@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
 
 		player = GetComponent<Rigidbody>();
 
-		// Move player on the Z axis (sideways)
 		if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
 		{
 			player.AddForce(force * Time.deltaTime, 0f, 0f, ForceMode.VelocityChange);

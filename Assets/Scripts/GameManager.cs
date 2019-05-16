@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
 	{
 		int i;
 
-		// Spawn 2 new obstacles
 		for (i = -7; i < 7; i += 7)
 		{
 			Instantiate(obstaclePrefab,
